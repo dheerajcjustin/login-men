@@ -36,7 +36,7 @@ app.use(function (req, res, next) {
 });
 
 const auth = (req, res, next) => {
-  if (!req.session.user) {
+  if (!req.cookies.username) {
     let err = new Error("You are not authenticated");
     res.setHeader("WWW-Authenticate", "Basic");
     err.status = 401;
@@ -81,8 +81,8 @@ app.use("/login", (req, res) => {
 app.use(auth);
 
 app.get("/", (req, res) => {
-  if (req.session.user) {
-    res.render("pages/index", { username: req.session.name });
+  if (req.session.user || req.cookies.username) {
+    res.render("pages/index", { username: req.cookies.username });
   } else {
     res.redirect("/login");
   }
@@ -90,6 +90,7 @@ app.get("/", (req, res) => {
 
 app.get("/logout", (req, res) => {
   req.session.destroy(function (err) {
+    res.clearCookie("username");
     res.redirect("/login");
   });
 });

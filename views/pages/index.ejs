@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+
+</head>
+
+<body class="container">
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+
+    <main>
+        <div class="jumbotron container">
+            <h1>This is great <%=username %> </h1>
+            <p>Welcome to templating using EJS</p>
+            <li class="nav-item">
+                <a href="/logout" class="nav-link">Logout</a> %> 
+            </li>
+            
+          
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer') %>
+    </footer>
+</body>
+
+</html>
